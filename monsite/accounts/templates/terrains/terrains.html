@@ -89,7 +89,9 @@
 {% for Terrain in Terrain %}
                     <div class="col-md-4">
                       <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                        {% if Terrain.photo %}
+                        <img class="card-img-top" src =  "{{ Terrain.photo.url }}" alt="Card image cap">
+                        {% endif %}
                         <div class="card-body">
                           <p class="card-text"> Terrain Type: {{ Terrain.TerrainType }}</p>
                           <p class="card-text">Maximum capacity: {{ Terrain.maximumCapacity }}</p>

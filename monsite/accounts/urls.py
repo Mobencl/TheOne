@@ -5,6 +5,8 @@ from accounts.views import register_view
 from accounts.views import profile_view
 from accounts import views
 from accounts import forms
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 

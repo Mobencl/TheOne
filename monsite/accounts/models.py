@@ -5,10 +5,10 @@ from django.db.models.signals import post_save
 
 
 class ProfileUser(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     sportcenterName = models.CharField(max_length=100, default='')
-    password = models.CharField(max_length=70,default='')
-    role = models.CharField(max_length=255)
+    #password = models.CharField(max_length=70,default='')
+    role = models.CharField(max_length=255,default='')
 
 class Terrain (models.Model):
     terrainAvailibility =  models.ForeignKey(User,on_delete=models.CASCADE)
@@ -16,13 +16,16 @@ class Terrain (models.Model):
     minimumCapacity = models.IntegerField(default = 0)
     maximumCapacity = models.IntegerField(default = 0)
     Price= models.IntegerField(default = 0)
-
+    photo = models.ImageField(upload_to='user_directory_path',default='')
+    path= models.CharField(max_length=255,default='user_directory_path')
     class Meta:
         verbose_name_plural = 'Terrain'
 
+
+
 class Aivailibility(models.Model):
     availibility = models.ForeignKey(Terrain,on_delete=models.CASCADE)
-    opening = models.DateTimeField(default='')
+    opening = models.DateTimeField()
     closing = models.DateTimeField()
     notAvailableFrom= models.DateTimeField()
     notAvailableTill = models.DateTimeField()

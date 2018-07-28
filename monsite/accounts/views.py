@@ -85,7 +85,7 @@ def deleteTerrain(request,id):
 
 def addTerrain(request):
     user=request.user
-    form= AddTerrainView(request.POST)
+    form= AddTerrainView(request.POST,request.FILES)
     if request.method=='POST':
 
         if form.is_valid():
@@ -96,6 +96,9 @@ def addTerrain(request):
 
     return render(request,'terrains/addTerrain_form.html',{'form': form})
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 
 def logout_view(request):

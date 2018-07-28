@@ -19,9 +19,10 @@ class AddTerrainView(forms.ModelForm):
             'TerrainType',
             'minimumCapacity',
             'maximumCapacity',
+            'photo'
         )
 
-        
+
 
 
 
@@ -68,6 +69,7 @@ class PartnerRegisterForm(forms.ModelForm):
             'email',
             'password',
             'role',
+
         )
 
 
