@@ -6,6 +6,10 @@ from django.contrib.auth import (authenticate,
 from django.contrib.auth.models import User
 from accounts.models import Terrain
 
+
+
+
+
 class AddTerrainView(forms.ModelForm):
     TerrainType= forms.CharField(label ='Terrain Type',
     max_length = 255,
@@ -143,20 +147,20 @@ class AvailibilityForm(forms.ModelForm):
 
     notAvailableFrom = forms.DateTimeField(
     label ='Not available From',
-    widget = forms.DateTimeInput(attrs = {'class':'form-control'}))
+    widget=forms.SplitDateTimeWidget())
 
 
     notAvailableTill = forms.DateTimeField(
     label ='Not available till',
-    widget = forms.DateTimeInput(attrs = {'class':'form-control'}))
+    widget=forms.SplitDateTimeWidget())
 
     opening = forms.DateTimeField(
 label ='Opening',
-widget = forms.DateTimeInput(attrs = {'class':'form-control'}))
+ widget=forms.SplitDateTimeWidget())
 
     closing = forms.DateTimeField(
  label ='Opening',
- widget = forms.DateTimeInput(attrs = {'class':'form-control'}))
+ widget=forms.SplitDateTimeWidget())
 
     class Meta:
         model = User
