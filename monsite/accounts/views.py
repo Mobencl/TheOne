@@ -9,8 +9,8 @@ from accounts.forms import PartnerRegisterForm
 from accounts.models import Terrain
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
-from accounts.forms import AddTerrainView
-from accounts.models import ProfileUser
+from accounts.forms import AddTerrainView,AvailibilityForm
+from accounts.models import ProfileUser, Aivailibility
 
 
 def home (request):
@@ -25,6 +25,7 @@ def login_view(request):
         login(request, user)
         return redirect('/account/profile/')
     return render(request,'accounts/login.html',{'form': form})
+
 
 #def partner_register_view(request):
 #    form = PartnerRegisterForm(request.POST or None)
@@ -111,3 +112,21 @@ def logout_view(request):
         login(request, user)
         return redirect('/account/profile/')
     return render(request,'accounts/login.html',{'form': form})
+
+
+def addAvailibility(request,id):
+    terrain= Terrain.objects.get(id=id)
+    availibility = Aivailibility.objects.filter(availibility=terrain)
+    form = AvailibilityForm(request.POST)
+    if request.method=='POST':
+        if form.is_valid():
+            terrain=form.save(commit=False)
+
+            availibility.notAvailableFrom=request.POST.get('notAvailableFrom')
+            availibility.notAvailableTill=request.POST.get('notAvailableTill')
+            availibility.opening=request.POST.get('opening')
+            availibility.closing=request.POST.get('closing')
+            availibility.save()
+        return redirect('/account/profile/partner/terrains/')
+
+    return render(request,'terrains/availibility.html',{'form': form})

@@ -137,3 +137,32 @@ class UserLoginForm(forms.Form):
             if not user.is_active:
                 raise forms.ValidationError("This user is no longer active")
             return super(UserLoginForm, self).clean(*args, **kwargs)
+
+
+class AvailibilityForm(forms.ModelForm):
+
+    notAvailableFrom = forms.DateTimeField(
+    label ='Not available From',
+    widget = forms.DateTimeInput(attrs = {'class':'form-control'}))
+
+
+    notAvailableTill = forms.DateTimeField(
+    label ='Not available till',
+    widget = forms.DateTimeInput(attrs = {'class':'form-control'}))
+
+    opening = forms.DateTimeField(
+label ='Opening',
+widget = forms.DateTimeInput(attrs = {'class':'form-control'}))
+
+    closing = forms.DateTimeField(
+ label ='Opening',
+ widget = forms.DateTimeInput(attrs = {'class':'form-control'}))
+
+    class Meta:
+        model = User
+        fields = (
+            'opening',
+            'closing',
+            'notAvailableFrom',
+            'notAvailableTill',
+        )

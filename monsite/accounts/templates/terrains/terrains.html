@@ -98,7 +98,7 @@
                           <p class="card-text">Minimum Capacity: {{ Terrain.minimumCapacity }}</p>
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Availibility</button>
+                              <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'accounts:addavailibility' Terrain.id %}" >Availibility</a>
                               <button type="button" class="btn btn-sm btn-outline-secondary">Add Photo</button>
                               <a role="button" class="btn btn-sm btn-outline-secondary" href ="{% url 'accounts:deleteterrain' Terrain.id %}">delete</a>
                             </div>
