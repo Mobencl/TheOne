@@ -62,11 +62,8 @@ def partner_register_view(request):
 
     return render(request,'accounts/register_form.html',{'form': form})
 
-def profile_view(request,pk=None):
-    if pk:
-        user = User.objects.get(pk=pk)
-    else:
-        user = request.user
+def profile_view(request):
+    user = request.user
     args = {'user': user}
     return render(request, 'accounts/profile.html',args)
 
@@ -119,19 +116,16 @@ def showAvailibilities(request,id):
     availibility_list = Aivailibility.objects.filter(availibility=terrain)
     return render(request,'terrains/availibility.html',{'Availibility': availibility_list})
 
-def addAvailibility(request):
+def addAvailibility(request,id):
     user=request.user
+    terrain = Terrain.objects.get(id=id)
     #availibility = Aivailibility.objects.get(partner=user)
-    form= AvailibilityForm(request.POST)
+    form= AvailibilityForm(request.POST or None)
     if request.method =='POST':
         if form.is_valid():
-            availibility = Aivailibility.objects.create()
-            availibility.availibility =  terrain.terrainAvailibility
-            availibility.opening=POST.get('opening')
-            availibility.closing=POST.get('closing')
-            availibility.notAvailableFrom = POST.get('notAvailableFrom')
-            availibility.notAvailableTill = POST.get('notAvailableTill')
-            availibility.save()
+            availibilities = form.save(commit=False)
+            availibilities.availibility =  terrain.terrainAvailibility
+            availibilities.save()
         return redirect('/account/profile/partner/terrains')
 
     return render(request,'terrains/addavailibility.html',{'form': form})
