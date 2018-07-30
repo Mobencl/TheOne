@@ -114,24 +114,19 @@ def logout_view(request):
 
 
 def showAvailibilities(request,id):
-    user=request.user
+    #user=request.user
     terrain = Terrain.objects.get(id=id)
     availibility_list = Aivailibility.objects.filter(availibility=terrain)
     return render(request,'terrains/availibility.html',{'Availibility': availibility_list})
 
-#def addAvailibility(request,id):
-#    terrain= Terrain.objects.get(id=id)
-#    availibility = Aivailibility.objects.filter(availibility=terrain)
-#    form = AvailibilityForm(request.POST)
-#    if request.method=='POST':
-#        if form.is_valid():
-    #        terrain=form.save(commit=False)
+def addAvailibility(request):
+    user=request.user
+    form= AvailibilityForm(request.POST)
+    if request.method=='POST':
+        if form.is_valid():
+            terrain =form.save(commit=False)
+            terrain.availibility = request.user
+            terrain.save()
+        return redirect('/account/profile/partner/terrains/')
 
-    #        availibility.notAvailableFrom=request.POST.get('notAvailableFrom')
-    #        availibility.notAvailableTill=request.POST.get('notAvailableTill')
-    #        availibility.opening=request.POST.get('opening')
-    #        availibility.closing=request.POST.get('closing')
-    #        availibility.save()
-    #    return redirect('/account/profile/partner/terrains/')
-
-#    return render(request,'terrains/availibility.html',{'form': form})
+    return render(request,'terrains/addavailibility.html',{'form': form})

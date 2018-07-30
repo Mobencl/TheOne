@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^profile/partner/terrains/(?P<id>[0-9]+)/delete$', views.deleteTerrain,  name='deleteterrain'),
     url(r'^profile/partner/add$', views.addTerrain,  name='addterrain'),
     url(r'^profile/partner/terrains/(?P<id>[0-9]+)/showavailibility$', views.showAvailibilities,  name='showavailibility'),
-    #url(r'^profile/edit/$', views.edit , name='edit'),
+    url(r'^profile/partner/terrains/addavailibility$', views.addAvailibility,  name='addavailibility')
 
 
 ]
