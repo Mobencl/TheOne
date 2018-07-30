@@ -25,6 +25,7 @@ class Terrain (models.Model):
 
 class Aivailibility(models.Model):
     availibility = models.ForeignKey(Terrain,on_delete=models.CASCADE)
+    #partner = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     opening = models.DateTimeField()
     closing = models.DateTimeField()
     notAvailableFrom= models.DateTimeField()

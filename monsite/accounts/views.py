@@ -121,12 +121,17 @@ def showAvailibilities(request,id):
 
 def addAvailibility(request):
     user=request.user
+    #availibility = Aivailibility.objects.get(partner=user)
     form= AvailibilityForm(request.POST)
-    if request.method=='POST':
+    if request.method =='POST':
         if form.is_valid():
-            terrain =form.save(commit=False)
-            terrain.availibility = request.user
-            terrain.save()
-        return redirect('/account/profile/partner/terrains/')
+            availibility = Aivailibility.objects.create()
+            availibility.availibility =  terrain.terrainAvailibility
+            availibility.opening=POST.get('opening')
+            availibility.closing=POST.get('closing')
+            availibility.notAvailableFrom = POST.get('notAvailableFrom')
+            availibility.notAvailableTill = POST.get('notAvailableTill')
+            availibility.save()
+        return redirect('/account/profile/partner/terrains')
 
     return render(request,'terrains/addavailibility.html',{'form': form})

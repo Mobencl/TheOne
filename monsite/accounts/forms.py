@@ -4,7 +4,7 @@ from django.contrib.auth import (authenticate,
      login,
      logout,)
 from django.contrib.auth.models import User
-from accounts.models import Terrain
+from accounts.models import Terrain, Aivailibility
 
 
 
@@ -163,7 +163,7 @@ label ='Opening',
  widget=forms.SplitDateTimeWidget())
 
     class Meta:
-        model = User
+        model = Aivailibility
         fields = (
             'opening',
             'closing',
