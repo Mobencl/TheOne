@@ -62,8 +62,11 @@ def partner_register_view(request):
 
     return render(request,'accounts/register_form.html',{'form': form})
 
-def profile_view(request):
-    user = request.user
+def profile_view(request,pk=None):
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = request.user
     args = {'user': user}
     return render(request, 'accounts/profile.html',args)
 
@@ -124,7 +127,7 @@ def addAvailibility(request,id):
     if request.method =='POST':
         if form.is_valid():
             availibilities = form.save(commit=False)
-            availibilities.availibility =  terrain.terrainAvailibility
+            availibilities.availibility =  terrain
             availibilities.save()
         return redirect('/account/profile/partner/terrains')
 

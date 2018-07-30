@@ -5,7 +5,7 @@ from django.contrib.auth import (authenticate,
      logout,)
 from django.contrib.auth.models import User
 from accounts.models import Terrain, Aivailibility
-
+from django.contrib.admin.widgets import AdminSplitDateTime
 
 
 
@@ -145,22 +145,26 @@ class UserLoginForm(forms.Form):
 
 class AvailibilityForm(forms.ModelForm):
 
-    notAvailableFrom = forms.DateTimeField(
+    notAvailableFrom = forms.SplitDateTimeField(
     label ='Not available From',
-    widget=forms.SplitDateTimeWidget())
+    widget=AdminSplitDateTime()
+    )
 
 
-    notAvailableTill = forms.DateTimeField(
+    notAvailableTill = forms.SplitDateTimeField(
     label ='Not available till',
-    widget=forms.SplitDateTimeWidget())
+    widget=AdminSplitDateTime()
+    )
 
-    opening = forms.DateTimeField(
+    opening = forms.SplitDateTimeField(
 label ='Opening',
- widget=forms.SplitDateTimeWidget())
+widget=AdminSplitDateTime()
+ )
 
-    closing = forms.DateTimeField(
+    closing = forms.SplitDateTimeField(
  label ='Opening',
- widget=forms.SplitDateTimeWidget())
+ widget=AdminSplitDateTime()
+ )
 
     class Meta:
         model = Aivailibility
