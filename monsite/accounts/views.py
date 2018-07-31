@@ -33,7 +33,7 @@ def login_view(request):
 #        sportcenterNem=form
 
 
-def register_view(request):
+def player_register_view(request):
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
         user =  form.save(commit = False)
@@ -62,13 +62,16 @@ def partner_register_view(request):
 
     return render(request,'accounts/register_form.html',{'form': form})
 
-def profile_view(request,pk=None):
-    if pk:
-        user = User.objects.get(pk=pk)
-    else:
-        user = request.user
+def partnerprofile_view(request):
+    user = request.user
     args = {'user': user}
-    return render(request, 'accounts/profile.html',args)
+    return render(request, 'accounts/partnerprofile.html',args)
+
+
+def playerprofile_view(request):
+    user=request.user
+    return render(request,'accounts/playerprofile.html',{'user': user})
+
 
 def terrains_view(request):
     user=request.user
