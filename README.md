@@ -11,16 +11,19 @@ to some pages for each user  --It should be done the last two weeks before the p
 * Show The terrains for the partner/done
 * A partner can delete one of his terrains/done
 * I can show the availibility form so the user can add availibilities but I'm still working on saving that into the database --This should be done today--
-* Show availibilities to the partner -- This should be done today--
+* Show availibilities to the partner -- ''Trying to figure out how to display time and day from the datetimefield''
 
 
 # For the user:(Functions)
 
 --this should be done this week 4 august--
-* Start Booking
-* Show Sportcenters with details 
-* Show Terrains of each sportcenter with availibilities
-* make a booking(conditions for Booking in progress)
+* Start Booking/ done
+* Show Sportcenters with details/done
+* Show Terrains of each sportcenter with availibilities/done but I still can't display the date and the time from the datetimefield
+* make a booking(conditions for Booking in progress):
+Two models : Booking and Booking_inprogress 
+* When a user starts a booking and doesn't finish it, he should be able to finish it wihout having to redo all the process 
+
 
 
 -- This should be done 11 august--
