@@ -10,6 +10,7 @@ from django.contrib.admin.widgets import AdminSplitDateTime
 
 
 
+
 class AddTerrainView(forms.ModelForm):
     TerrainType= forms.CharField(label ='Terrain Type',
     max_length = 255,

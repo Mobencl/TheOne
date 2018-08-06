@@ -23,8 +23,9 @@ def login_view(request):
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('/account/profile/')
+        return redirect('/account/profile/player/')
     return render(request,'accounts/login.html',{'form': form})
+
 
 
 #def partner_register_view(request):
@@ -112,7 +113,7 @@ def logout_view(request):
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('/account/profile/')
+        return redirect('/account/profile/partner')
     return render(request,'accounts/login.html',{'form': form})
 
 

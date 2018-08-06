@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-
+from time import strftime
 
 
 class ProfileUser(models.Model):
@@ -9,7 +9,7 @@ class ProfileUser(models.Model):
     sportcenterName = models.CharField(max_length=100, default='')
     #password = models.CharField(max_length=70,default='')
     role = models.CharField(max_length=255,default='')
-
+    photo = models.ImageField(upload_to='user_directory_path',default='')
 class Terrain (models.Model):
     terrainAvailibility =  models.ForeignKey(User,on_delete=models.CASCADE)
     TerrainType = models.CharField(max_length  = 255)
@@ -26,10 +26,23 @@ class Terrain (models.Model):
 class Aivailibility(models.Model):
     availibility = models.ForeignKey(Terrain,on_delete=models.CASCADE)
     #partner = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    opening = models.DateTimeField()
-    closing = models.DateTimeField()
-    notAvailableFrom= models.DateTimeField()
-    notAvailableTill = models.DateTimeField()
+    opening = models.DateTimeField(null=True)
+    closing = models.DateTimeField(null=True)
+    notAvailableFrom= models.DateTimeField(null=True)
+    notAvailableTill = models.DateTimeField(null=True)
+    class Meta:
+        verbose_name_plural = 'Aivailibility'
+
+    #def From(self):
+    #    return self.strftime("%Y-%m-%d %H:%M:%S",self.notAivalableFrom)
+    #def Begin(self):
+    #        return self.strftime("%Y-%m-%d %H:%M:%S",self.opening)
+    #def End(self):
+    #        return self.strftime("%Y-%m-%d %H:%M:%S",self.closing)
+    #def Till(self):
+    #    return self.strftime("%Y-%m-%d %H:%M:%S".self.notAvaialableTill)
+
+
 
 
     #def __str__(self):
