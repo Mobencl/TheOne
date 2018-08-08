@@ -15,7 +15,6 @@ app_name = 'accounts'
 urlpatterns = [
     url(r'^$', views.home),
     url(r'^login/$', login_view,  name='login'),
-
     url(r'^logout/$', logout_view,  name='logout'),
     url(r'^register/player/$', player_register_view , name='register'),
     url(r'^profile/player/$', playerprofile_view , name='profileplayer'),

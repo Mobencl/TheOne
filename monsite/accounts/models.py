@@ -20,9 +20,6 @@ class Terrain (models.Model):
     path= models.CharField(max_length=255,default='user_directory_path')
     class Meta:
         verbose_name_plural = 'Terrain'
-
-
-
 class Aivailibility(models.Model):
     availibility = models.ForeignKey(Terrain,on_delete=models.CASCADE)
     #partner = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
