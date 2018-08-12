@@ -11,6 +11,7 @@ class ProfileUser(models.Model):
     role = models.CharField(max_length=255,default='')
     photo = models.ImageField(upload_to='user_directory_path',default='')
 class Terrain (models.Model):
+    sportcenterName = models.CharField(max_length=255,default='')
     terrainAvailibility =  models.ForeignKey(User,on_delete=models.CASCADE)
     TerrainType = models.CharField(max_length  = 255)
     minimumCapacity = models.IntegerField(default = 0)
