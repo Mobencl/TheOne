@@ -5,12 +5,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from accounts.forms import UserLoginForm, UserRegisterForm
 from django.contrib.auth.decorators import login_required
-from accounts.forms import PartnerRegisterForm
+
 from accounts.models import Terrain
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from accounts.forms import AddTerrainView,AvailibilityForm
 from accounts.models import ProfileUser, Aivailibility
+from accounts.forms import UserRole
+
 
 
 def home (request):
@@ -23,18 +25,14 @@ def login_view(request):
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('/account/profile/player/')
+        if user.profileuser.role == 'Player':
+            return redirect('/account/profile/player/')
+        elif user.profileuser.role =='Partner':
+            return redirect('/account/profile/partner/')
     return render(request,'accounts/login.html',{'form': form})
 
 
-
-#def partner_register_view(request):
-#    form = PartnerRegisterForm(request.POST or None)
-#    if form.is_valid():
-#        sportcenterNem=form
-
-
-def player_register_view(request):
+def register_view(request):
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
         user =  form.save(commit = False)
@@ -45,23 +43,24 @@ def player_register_view(request):
         user.save()
         new_user = authenticate(username = user.username, password = password)
         login(request, new_user)
-        return redirect('/account/profile/player')
+        return redirect('/account/role/')
 
     return render(request,'accounts/register_form.html',{'form': form})
 
-def partner_register_view(request):
-    form = PartnerRegisterForm(request.POST or None)
-    if form.is_valid():
-        user =  form.save(commit = False)
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password')
-        user.set_password(password)
+
+def role_view(request):
+    form=UserRole(request.POST or None)
+    if form.is_valid:
+        user=request.user
+        role=request.POST.get('role')
+        user.profileuser.role=role
         user.save()
-        new_user = authenticate(username = user.username, password = password)
-        login(request, new_user)
-        return redirect('/account/profile/partner')
+        if  user.profileuser.role == 'Partner':
+            return redirect ('/account/profile/partner')
+        elif user.profileuser.role =='Player':
+            return redirect ('/account/profile/player')
+    return render(request,'accounts/userrole.html',{'form': form})
 
-    return render(request,'accounts/register_form.html',{'form': form})
 
 def partnerprofile_view(request):
     user = request.user
@@ -113,7 +112,10 @@ def logout_view(request):
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('/account/profile/partner')
+        if user.profileuser.role == 'Partner':
+            return redirect('/account/profile/partner')
+        elif user.profileuser.role == 'Player':
+            return redirect('/account/profile/player')
     return render(request,'accounts/login.html',{'form': form})
 
 

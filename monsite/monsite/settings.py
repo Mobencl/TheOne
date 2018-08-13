@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_q'
 
 
 ]
@@ -68,7 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                
+
 
             ],
         },
@@ -128,18 +129,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL='/account/'
 LOGIN_URL='/account/login/'
-HOME_URL ='/account/profile/'
+HOME_URL ='/account/profile/player'
 LOGIN_EXEMPT_URLS = {
 r'^account/logout/$',
 r'^account/register/$',
-r'^account/register/partner/$',
-r'^account/register/player/$',
 r'^account/$',
 r'^admin/'
+
 }
 HOME_EXEMPT_URLS = {
 r'^account/logout/$',
-
+r'^Booking/player/create/$',
+r'^Booking/player/create/(?P<id>[0-9]+)/availibility/$',
+r'^Booking/player/confirm/(?P<id>[0-9]+)/confirm/$'
 }
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

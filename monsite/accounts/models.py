@@ -1,15 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from time import strftime
-
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 class ProfileUser(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
-    sportcenterName = models.CharField(max_length=100, default='')
-    #password = models.CharField(max_length=70,default='')
-    role = models.CharField(max_length=255,default='')
-    photo = models.ImageField(upload_to='user_directory_path',default='')
+    role = models.CharField(max_length=255,null=True)
+@receiver(post_save, sender=User)
+def set_user(sender,instance,created,**kwargs):
+    if created:
+        ProfileUser.objects.create(user=instance)
+@receiver(post_save, sender=User)
+def save_set(sender,instance,**kwargs):
+    instance.profileuser.save()
+
 class Terrain (models.Model):
     sportcenterName = models.CharField(max_length=255,default='')
     terrainAvailibility =  models.ForeignKey(User,on_delete=models.CASCADE)

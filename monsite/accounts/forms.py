@@ -4,7 +4,7 @@ from django.contrib.auth import (authenticate,
      login,
      logout,)
 from django.contrib.auth.models import User
-from accounts.models import Terrain, Aivailibility
+from accounts.models import Terrain, Aivailibility,ProfileUser
 from django.contrib.admin.widgets import AdminSplitDateTime
 
 
@@ -33,51 +33,59 @@ class AddTerrainView(forms.ModelForm):
 
 
 
-class PartnerRegisterForm(forms.ModelForm):
-    username = forms.CharField(
-        label ='Username',
-        max_length = 100,
-        min_length = 5,
-        widget = forms.TextInput(attrs = {'class':'form-control'}))
+#class PartnerRegisterForm(forms.ModelForm):
+#    username = forms.CharField(
+#        label ='Username',
+#        max_length = 100,
+#        min_length = 5,
+#        widget = forms.TextInput(attrs = {'class':'form-control'}))
 
 
 
-    sportcenterName = forms.CharField(
-    label ='Sportcenter Name',
-    max_length = 100,
-    min_length = 5,
-    widget = forms.TextInput(attrs = {'class':'form-control'}))
+#    sportcenterName = forms.CharField(
+#    label ='Sportcenter Name',
+#    max_length = 100,
+#    min_length = 5,
+#    widget = forms.TextInput(attrs = {'class':'form-control'}))
 
 
 
 
-    email = forms.EmailField(widget = forms.TextInput(attrs = {'class':'form-control'}))
+#    email = forms.EmailField(widget = forms.TextInput(attrs = {'class':'form-control'}))
 
 
-    password = forms.CharField(
-    label ='Password',
-    max_length = 100,
-    min_length = 5,
-    widget = forms.PasswordInput(attrs = {'class':'form-control'}))
+#    password = forms.CharField(
+#    label ='Password',
+#    max_length = 100,
+#    min_length = 5,
+#    widget = forms.PasswordInput(attrs = {'class':'form-control'}))
 
+#    role = forms.CharField(
+#    label ='Do you want to be a Partner or a Player? ',
+#    max_length = 100,
+#    min_length = 5,
+#    widget = forms.TextInput(attrs = {'class':'form-control'}))
+
+
+#    class Meta:
+#        model = User
+#        fields = (
+#            'username',
+#            'email',
+#            'password',
+#            'role',
+
+#        )
+
+class UserRole(forms.ModelForm):
     role = forms.CharField(
-    label ='Do you want to be a Partner or a Player? ',
+    label ='Role',
     max_length = 100,
     min_length = 5,
     widget = forms.TextInput(attrs = {'class':'form-control'}))
-
-
     class Meta:
-        model = User
-        fields = (
-            'username',
-            'email',
-            'password',
-            'role',
-
-        )
-
-
+        model = ProfileUser
+        fields = ('role',)
 class UserRegisterForm(forms.ModelForm):
     username = forms.CharField(
     label ='Username',
@@ -86,11 +94,7 @@ class UserRegisterForm(forms.ModelForm):
     widget = forms.TextInput(attrs = {'class':'form-control'}))
 
 
-    role = forms.CharField(
-    label ='Do you want to be a Partner or a Player? ',
-    max_length = 100,
-    min_length = 5,
-    widget = forms.TextInput(attrs = {'class':'form-control'}))
+
 
     email = forms.EmailField(widget = forms.TextInput(attrs = {'class':'form-control'}))
 
@@ -121,7 +125,7 @@ widget = forms.TextInput(attrs = {'class':'form-control'}))
             'last_name',
             'email',
             'password',
-            'role',
+
         )
 
 class UserLoginForm(forms.Form):
