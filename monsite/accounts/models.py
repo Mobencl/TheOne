@@ -7,6 +7,8 @@ from django.db.models.signals import post_save
 class ProfileUser(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     role = models.CharField(max_length=255,null=True)
+    #address = models.CharField(max_length=255,null=True)
+    #gender = models.CharField(max_length=255,null=True)
 @receiver(post_save, sender=User)
 def set_user(sender,instance,created,**kwargs):
     if created:

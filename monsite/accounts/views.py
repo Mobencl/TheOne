@@ -44,7 +44,6 @@ def register_view(request):
         new_user = authenticate(username = user.username, password = password)
         login(request, new_user)
         return redirect('/account/role/')
-
     return render(request,'accounts/register_form.html',{'form': form})
 
 
@@ -96,7 +95,6 @@ def addTerrain(request):
             terrain.terrainAvailibility = request.user
             terrain.save()
         return redirect('/account/profile/partner/terrains')
-
     return render(request,'terrains/addTerrain_form.html',{'form': form})
 
 def user_directory_path(instance, filename):
@@ -136,5 +134,4 @@ def addAvailibility(request,id):
             availibilities.availibility =  terrain
             availibilities.save()
         return redirect('/account/profile/partner/terrains')
-
     return render(request,'terrains/addavailibility.html',{'form': form})
