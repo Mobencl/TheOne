@@ -53,13 +53,13 @@ def confirm_booking(request,id):
 
 def show_confirmedbookings(request):
     user=request.user
-    confirmedbooking_list = Booking_inprogress.objects.get(user=user).get(status=1)
-    return render(request,{'player/confirmed_bookings.html',{'Booking_inprogress': confirmedbooking_list}})
+    confirmedbooking_list = Booking_inprogress.objects.filter(user=user).filter(status=1)
+    return render(request,'player/confirmed_bookings.html',{'Booking_inprogress': confirmedbooking_list})
 
 def show_bookingsinprogress(request):
     user=request.user
-    bookinginprogress_list = Booking_inprogress.objects.get(user=user).get(status=0)
-    return render(request,{'player/bookings_inprogress.html'})
+    bookinginprogress_list = Booking_inprogress.objects.filter(user=user).filter(status=0)
+    return render(request,'player/bookings_inprogress.html',{'Booking_inprogress': bookinginprogress_list})
 
 
 

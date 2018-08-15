@@ -1,6 +1,5 @@
 <!doctype html>
 {% load static %}
-
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -19,9 +18,10 @@
      <link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet">
   </head>
 
-  <body class="bg-light" background="">
+  <body class="bg-light" background="http://www.insightbmx.com/wp-content/uploads/2013/04/black-gradient-background.png">
     <div class="container">
           <div class="py-5 text-center">
+
 
 
           </div>
@@ -78,75 +78,45 @@
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
         <img class="mr-3" src="../../assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
         <div class="lh-100">
-          <h6 class="mb-0 text-white lh-100">Step 3 : Confirm your reservation and make a payment</h6>
+          <h6 class="mb-0 text-white lh-100">Step 1 : Choose a terrain and check its availibility</h6>
           <small></small>
         </div>
       </div>
 
 
+      <div class="album py-5 bg-light">
+              <div class="container">
+
+                <div class="row">
+{% for Booking_inprogress in Booking_inprogress %}
+                  <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                      {% if Booking_inprogress.terrain.photo %}
+                      <img class="card-img-top" src =  "{{ Booking_inprogress.terrain.photo.url }}" alt="Card image cap">
+                      {% endif %}
+                      <div class="card-body">
+
+                        <p class="card-text"> Sport center: {{ Booking_inprogress.terrain.sportcenterName }}</p>
+                        <p class="card-text">Type: {{ Booking_inprogress.terrain.TerrainType }}  </p>
+                        <p class="card-text">ID: {{ Booking_inprogress.booking_id }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Edit booking</a>
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Delete booking</a>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
 
 
-           <h2></h2>
+                  </div>
 
-           </div>
-<center>
-           <div class="col-md-7">
-             <div class="card mb-4 box-shadow">
-               {% if Terrain.photo %}
-               <img class="card-img-top" src =  "{{ Terrain.photo.url }}" alt="Card image cap">
-               {% endif %}
-               <div class="card-body">
-
-                 <div class="table-responsive">
-                   <table class="table table-striped table-sm">
-                     <thead>
-
-                       <tr>
-                         <th></th>
-
-                         <th>Sport center</th>
-                         <th>Terrain</th>
-                         <th>Capacity</th>
-                         <th>From</th>
-                         <th>Till</th>
-                       </tr>
-
-                     </thead>
-                     <tbody>
+{% endfor %}
 
 
-                       <tr>
-                         <td></td>
-                         <td>{{Terrain.sportcenterName}}</td>
-                         <td>{{Terrain.TerrainType}}</td>
-                         <td>{{Terrain.maximumCapacity}}</td>
-                         <td>{{ Booking_inprogress.bookingFrom}}</td>
-                         <td>{{ Booking_inprogress.bookingUntil}}</td>
-                         <td></td>
-
-                       </tr>
-
-
-
-
-                   </table>
-                    <center>
-                 <div class="d-flex justify-content-between align-items-center">
-                   <div class="btn-group">
-
-                     <a role="button" class=" btn btn-sm btn-outline-secondary" href="{% url 'Booking:confirm' %}" >Confirm booking</a>
-
-
-                   </div>
-
-                 </div>
-                   </center>
-               </div>
-             </div>
-
-
-           </div>
-</center>
 
 
     </main>
