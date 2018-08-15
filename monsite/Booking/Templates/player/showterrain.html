@@ -1,0 +1,141 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Checkout example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'accounts/register/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'accounts/register/css/form-validation.css' %}" rel="stylesheet">
+     <link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-light" background="http://www.insightbmx.com/wp-content/uploads/2013/04/black-gradient-background.png">
+    <div class="container">
+          <div class="py-5 text-center">
+
+
+
+          </div>
+          <header>
+          <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link">Hey {{ user }} <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="edit/">Edit profile</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Settings</a>
+                </li>
+
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/logout/">Log out</a>
+                </li>
+              </ul> </nav>
+            </header>
+
+            <center class="row">
+            <div class="col-lg-12">
+              <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+              <h2>{{ user }}</h2>
+              <p></p>
+
+            </center><!-- /.col-lg-4 -->
+
+
+
+  <div class="nav-scroller bg-white box-shadow">
+      <nav class="nav nav-underline">
+        <a class="nav-link active" href="#">Buddy</a>
+        <a class="nav-link" href="/account/profile/player/">
+          Game proposals
+        </a>
+        <a class="nav-link" href="/Booking/create/">Booking in Progress</a>
+        <a class="nav-link" href="#"></a>
+
+      </nav>
+    </div>
+
+    <main role="main" class="container">
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+        <img class="mr-3" src="../../assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
+        <div class="lh-100">
+          <h6 class="mb-0 text-white lh-100">Step 1 : Choose a terrain and check its availibility</h6>
+          <small></small>
+        </div>
+      </div>
+
+
+      <div class="album py-5 bg-light">
+              <div class="container">
+
+                <div class="row">
+{% for Terrain in Terrain %}
+                  <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                      {% if Terrain.photo %}
+                      <img class="card-img-top" src =  "{{ Terrain.photo.url }}" alt="Card image cap">
+                      {% endif %}
+                      <div class="card-body">
+
+                        <p class="card-text"> Terrain Type: {{ Terrain.TerrainType }}</p>
+                        <p class="card-text">Maximum capacity: {{ Terrain.maximumCapacity }}</p>
+                        <p class="card-text">Minimum Capacity: {{ Terrain.minimumCapacity }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:availibility' Terrain.id %}" >Show availibility</a>
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'accounts:showavailibility' Terrain.id %}" >Show games</a>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+{% endfor %}
+
+
+
+
+    </main>
+
+
+
+
+
+              <!-- Bootstrap core JavaScript
+              ================================================== -->
+              <!-- Placed at the end of the document so the pages load faster -->
+              <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+              <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+
+              <script src="{% static 'base/js/popper.min.js' %}"></script>
+              <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+              <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
+              <script src="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.js"></script>
+              <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+
+              </body>
+              </html>
