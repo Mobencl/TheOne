@@ -43,25 +43,23 @@ def show_availibility(request,id):
             return render(request,'player/bookinginprogress.html',{'Booking_inprogress':booking ,'Terrain':terrain })
     return render(request,'player/showavailibility.html',{'Aivailibility': availibility_list, 'form': form })
 
-def confirm_booking(request):
+def confirm_booking(request,id):
     user=request.user
-    status=0
-    booking_inprogress = Booking_inprogress.objects.filter(user=user).filter(status=0)
+    booking_inprogress = Booking_inprogress.objects.get(id=id)
     booking_inprogress.status = 1
-
     booking_inprogress.save()
     #Confirmed booking the default 0 is for a booking in progress
     return render(request,'player/show_booking.html',{'Booking_inprogress': booking_inprogress})
 
 def show_confirmedbookings(request):
     user=request.user
-    confirmesbooking_list = Booking_inprogress.objects.get(user=user).get(status=2)
-    return render(request,{'player/confirmed_bookings.html'})
+    confirmedbooking_list = Booking_inprogress.objects.get(user=user).get(status=1)
+    return render(request,{'player/confirmed_bookings.html',{'Booking_inprogress': confirmedbooking_list}})
 
 def show_bookingsinprogress(request):
     user=request.user
-    bookinginprogress_list = Booking_inprogress.objects.get(user=user).get(status=1)
-    return render(request,{'player/booking_inprogress.html'})
+    bookinginprogress_list = Booking_inprogress.objects.get(user=user).get(status=0)
+    return render(request,{'player/bookings_inprogress.html'})
 
 
 
