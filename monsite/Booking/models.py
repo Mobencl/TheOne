@@ -5,6 +5,13 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 # Create your models here.
 
+
+class Guest(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    class Meta:
+        verbose_name_plural = 'Guest'
+
+
 class Booking_inprogress(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     terrain = models.ForeignKey(Terrain, on_delete = models.CASCADE)
@@ -15,5 +22,6 @@ class Booking_inprogress(models.Model):
     booking_id = models.CharField(max_length=254,null=True)
     terraintype = models.CharField(max_length=254)
     status = models.IntegerField(blank=True)
+    guest = models.ForeignKey(Guest, on_delete = models.CASCADE,null=True)
     class Meta:
         verbose_name_plural = 'Booking_inprogress'

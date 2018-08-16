@@ -13,6 +13,7 @@ from accounts.models import ProfileUser, Aivailibility
 from Booking.forms import BookingProgress
 from Booking.models import Booking_inprogress
 import uuid
+from django.contrib.auth.models import User
 
 def show_terrains(request):
         user=request.user
@@ -35,11 +36,7 @@ def show_availibility(request,id):
             bookingFromTill.save()
             bookingid = bookingFromTill.booking_id
             booking = Booking_inprogress.objects.get(booking_id = bookingid)
-            new_availibility = Aivailibility()
-            new_availibility.notAvailableFrom= bookingFromTill.bookingFrom
-            new_availibility.notAvailableTill= bookingFromTill.bookingUntil
-            new_availibility.availibility= terrain
-            new_availibility.save()
+
             return render(request,'player/bookinginprogress.html',{'Booking_inprogress':booking ,'Terrain':terrain })
     return render(request,'player/showavailibility.html',{'Aivailibility': availibility_list, 'form': form })
 
@@ -48,6 +45,11 @@ def confirm_booking(request,id):
     booking_inprogress = Booking_inprogress.objects.get(id=id)
     booking_inprogress.status = 1
     booking_inprogress.save()
+    new_availibility = Aivailibility()
+    new_availibility.notAvailableFrom= booking_inprogress.bookingFrom
+    new_availibility.notAvailableTill= booking_inprogress.bookingUntil
+    new_availibility.availibility= booking_inprogress.terrain
+    new_availibility.save()
     #Confirmed booking the default 0 is for a booking in progress
     return render(request,'player/show_booking.html',{'Booking_inprogress': booking_inprogress})
 
@@ -61,7 +63,28 @@ def show_bookingsinprogress(request):
     bookinginprogress_list = Booking_inprogress.objects.filter(user=user).filter(status=0)
     return render(request,'player/bookings_inprogress.html',{'Booking_inprogress': bookinginprogress_list})
 
+def delete_confirmedbooking(request,id):
+    booking = Booking_inprogress.objects.get(id=id)
+    booking.delete()
+    return HttpResponseRedirect(reverse('Booking:showconfirmedbookings'))
 
+def delete_bookinginprogress(request,id):
+    booking =Booking_inprogress.objects.get(id=id)
+    booking.delete()
+    return HttpResponseRedirect(reverse('Booking:showbookingsinprogress'))
+
+
+def show_guests(request):
+    user=request.user
+    guest_list = User.objects.exclude(id=user.id)
+    return render(request,'player/show_guests.html',{'Guest': guest_list})
+
+def addToGame(request,id):
+    user=user.request
+    booking_inprogress = Booking_inprogress.objects.get(id=id)
+    guest = User.objects.get(id=id)
+    booking_inprogress.guest = guest
+    return HttpResponseRedirect(reverse('Booking:addToGame'))
 
 
 #def show_booking(request,id):

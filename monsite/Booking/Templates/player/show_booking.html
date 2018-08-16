@@ -64,21 +64,19 @@
 
   <div class="nav-scroller bg-white box-shadow">
       <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Buddy</a>
-        <a class="nav-link" href="/account/profile/player/">
-          Game proposals
-        </a>
-        <a class="nav-link" href="/Booking/create/">Booking in Progress</a>
-        <a class="nav-link" href="#"></a>
+        <a class="nav-link active" href="/account/profile/player/">Buddy</a>
+
+        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
+        <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
 
       </nav>
     </div>
 
     <main role="main" class="container">
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
-        <img class="mr-3" src="../../assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
+
         <div class="lh-100">
-          <h6 class="mb-0 text-white lh-100">Step 3 : Confirm your reservation and make a payment</h6>
+          <h6 class="mb-0 text-white lh-100">Your reservation is now confirmed</h6>
           <small></small>
         </div>
       </div>
@@ -91,7 +89,7 @@
            </div>
 
 <center>
-           <div class="col-md-7">
+           <div class="col-md-5">
              <div class="card mb-4 box-shadow">
                {% if Booking_inprogress.terrain.photo %}
                <img class="card-img-top" src =  "{{ Booking_inprogress.terrain.photo.url }}" alt="Card image cap">
@@ -110,6 +108,7 @@
                          <th>Capacity</th>
                          <th>From</th>
                          <th>Till</th>
+                         <th>ID</th>
                        </tr>
 
                      </thead>
@@ -123,6 +122,7 @@
                          <td>{{Booking_inprogress.terrain.maximumCapacity}}</td>
                          <td>{{ Booking_inprogress.bookingFrom}}</td>
                          <td>{{ Booking_inprogress.bookingUntil}}</td>
+                         <td>{{ Booking_inprogress.booking_id}}</td>
                          <td></td>
 
                        </tr>
@@ -135,7 +135,7 @@
                  <div class="d-flex justify-content-between align-items-center">
                    <div class="btn-group">
 
-                     <a role="button" class=" btn btn-sm btn-outline-secondary" href="" >Confirm booking</a>
+
 
 
                    </div>

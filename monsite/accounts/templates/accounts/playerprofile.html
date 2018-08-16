@@ -18,6 +18,40 @@
      <link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet">
   </head>
 
+  <body class="bg-light">
+    <div class="container">
+          <div class="py-5 text-center">
+
+
+
+          </div>
+          <header>
+          <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link">Hey {{ user }} <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Games</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Settings</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="edit/">Edit profile</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/logout/">Log out</a>
+                </li>
+              </ul> </nav>
+            </header>
+
   <body class="bg-light" background="http://www.insightbmx.com/wp-content/uploads/2013/04/black-gradient-background.png">
     <div class="container">
 
@@ -41,13 +75,14 @@
         </a>
         <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
         <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
+        <a class="nav-link" href="/Booking/player/guests/">BPlayers</a>
 
       </nav>
     </div>
 
     <main role="main" class="container">
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
-        <img class="mr-3" src="../../assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
+
         <div class="lh-100">
           <h6 class="mb-0 text-white lh-100">Game proposals</h6>
           <small></small>
