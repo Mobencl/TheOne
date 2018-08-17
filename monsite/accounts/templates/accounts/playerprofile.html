@@ -75,7 +75,7 @@
         </a>
         <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
         <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
-        <a class="nav-link" href="/Booking/player/guests/">BPlayers</a>
+
 
       </nav>
     </div>
@@ -88,16 +88,36 @@
           <small></small>
         </div>
       </div>
+{% for Guest in Guest %}
 
-      <div class="my-3 p-3 bg-white rounded box-shadow">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Recent bookings</h6>
-        <div class="media text-muted pt-3">
-          <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <strong class="d-block text-gray-dark">@username</strong>
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-          </p>
-        </div>
+                        <div class="col-md-4">
+                          <div class="card mb-4 box-shadow">
+                            {% if Guest.booking.terrain.photo %}
+                            <img class="card-img-top" src =  "{{ Booking_inprogress.terrain.photo.url }}" alt="Card image cap">
+                            {% endif %}
+                            <div class="card-body">
+
+                              <p class="card-text"> Sport center: {{ Guest.booking.user.first_name }}</p>
+                              <p class="card-text">Type: {{ Guest.booking.terrain.TerrainType }}  </p>
+                              <p class="card-text">ID: {{ Guest.booking.booking_id }}</p>
+                              <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+
+                                  <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Edit booking</a>
+                                  <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Delete booking</a>
+
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+
+{% endfor %}
+
 
     </main>
 

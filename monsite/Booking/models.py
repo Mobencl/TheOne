@@ -18,6 +18,7 @@ class Booking_inprogress(models.Model):
     booking_id = models.CharField(max_length=254,null=True)
     terraintype = models.CharField(max_length=254)
     status = models.IntegerField(blank=True)
+    counter = models.IntegerField(default=0)
     class Meta:
         verbose_name_plural = 'Booking_inprogress'
 

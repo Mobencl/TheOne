@@ -89,10 +89,7 @@ def add_guests(request,id):
     return HttpResponseRedirect(reverse('Booking:showguests'))
 
 
-#def show_proposals(request):
-#    user=request.user
-#    bookingproposal_list = Booking_inprogress.objects.get(guest=user)
-#    return render(request,'player/add_guests.html',{'Booking_inprogress': bookingproposal_list})
+
 
 #def accept_proposal(request,id):
 #    booking_proposal = Booking_inprogress.objects.get(id=id)

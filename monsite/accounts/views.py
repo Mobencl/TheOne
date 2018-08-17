@@ -12,7 +12,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from accounts.forms import AddTerrainView,AvailibilityForm
 from accounts.models import ProfileUser, Aivailibility
 from accounts.forms import UserRole
-
+from Booking.models import Guest
 
 
 def home (request):
@@ -69,7 +69,8 @@ def partnerprofile_view(request):
 
 def playerprofile_view(request):
     user=request.user
-    return render(request,'accounts/playerprofile.html',{'user': user})
+    guest_list =Guest.objects.filter(user=user)
+    return render(request,'accounts/playerprofile.html',{'user': user,'Guest': guest_list})
 
 
 def terrains_view(request):
