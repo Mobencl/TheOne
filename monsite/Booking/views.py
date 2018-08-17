@@ -83,7 +83,7 @@ def add_guests(request,id):
     booking_inprogress = Booking_inprogress.objects.get(user=user)#there is only one booking in progress
     guest = User.objects.get(id=id)
     newGuest = Guest()
-    newGuest.Booking_inprogress=booking_inprogress.id
+    newGuest.booking=booking_inprogress
     newGuest.user=guest
     newGuest.save()
     return HttpResponseRedirect(reverse('Booking:showguests'))
