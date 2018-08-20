@@ -64,9 +64,10 @@
 
   <div class="nav-scroller bg-white box-shadow">
       <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Buddy</a>
+        <a class="nav-link active" href="/account/profile/player/">Buddy</a>
         <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
         <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
+
 
       </nav>
     </div>
@@ -85,22 +86,22 @@
               <div class="container">
 
                 <div class="row">
-{% for Booking_inprogress in Booking_inprogress %}
+{% for ProfileUser in ProfileUser %}
                   <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                      {% if Booking_inprogress.terrain.photo %}
-                      <img class="card-img-top" src =  "{{ Booking_inprogress.terrain.photo.url }}" alt="Card image cap">
-                      {% endif %}
+
+                      <img class="card-img-top" src =  "{{ Guest.booking.terrain.photo.url }}" alt="Card image cap">
+
                       <div class="card-body">
 
-                        <p class="card-text"> Sport center: {{ Booking_inprogress.terrain.sportcenterName }}</p>
-                        <p class="card-text">Type: {{ Booking_inprogress.terrain.TerrainType }}  </p>
-                        <p class="card-text">ID: {{ Booking_inprogress.booking_id }}</p>
+                        <p class="card-text"> Terrain Type: {{ ProfileUser.user.username }}</p>
+                        <p class="card-text">Maximum capacity: {{ ProfileUser.user.username }}</p>
+                        <p class="card-text">Minimum Capacity: {{ ProfileUser.user.last_name }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
 
-                            <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Edit booking</a>
-                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:deleteconfirmedbooking' Booking_inprogress.id %}" >Delete booking</a>
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:addguests' ProfileUser.id %}" >Invite</a>
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Cancel booking</a>
 
                           </div>
 
@@ -112,7 +113,6 @@
                   </div>
 
 {% endfor %}
-
 
 
 

@@ -60,42 +60,60 @@ def show_confirmedbookings(request):
 def show_bookingsinprogress(request):
     user=request.user
     bookinginprogress_list = Booking_inprogress.objects.filter(user=user).filter(status=0)
-    return render(request,'player/bookings_inprogress.html',{'Booking_inprogress': bookinginprogress_list})
+    inprogressguest_list = Guest.objects.filter(user=user).filter(status=1)
+    return render(request,'player/bookings_inprogress.html',{'Booking_inprogress': bookinginprogress_list, 'Guest': inprogressguest_list })
 
 def delete_confirmedbooking(request,id):
     booking = Booking_inprogress.objects.get(id=id)
     booking.delete()
     return HttpResponseRedirect(reverse('Booking:showconfirmedbookings'))
 
+#I should add a function so the guest can cancel his booking in a guest_list/status =  or delete the Guest from the database
+
 def delete_bookinginprogress(request,id):
     booking =Booking_inprogress.objects.get(id=id)
+    guest_list= Guest.objects.filter(booking=booking)
+    guest_list.delete()
     booking.delete()
     return HttpResponseRedirect(reverse('Booking:showbookingsinprogress'))
 
 
 def show_guests(request):
     user=request.user
-    guest_list = User.objects.exclude(id=user.id)
-    return render(request,'player/show_guests.html',{'Guest': guest_list})
+    role=user.profileuser.role
+    guest_list = ProfileUser.objects.exclude(id=user.id).filter(role='Player')
+    return render(request,'player/show_guests.html',{'ProfileUser': guest_list})
 
 def add_guests(request,id):
     user=request.user
     booking_inprogress = Booking_inprogress.objects.get(user=user)#there is only one booking in progress
-    guest = User.objects.get(id=id)
+    profileUser = ProfileUser.objects.get(id=id)
     newGuest = Guest()
     newGuest.booking=booking_inprogress
-    newGuest.user=guest
+    newGuest.user=profileUser.user
     newGuest.save()
     return HttpResponseRedirect(reverse('Booking:showguests'))
 
 
 
 
-#def accept_proposal(request,id):
-#    booking_proposal = Booking_inprogress.objects.get(id=id)
-#    booking_proposal.guest.status=1
-#    booking_proposal.save()
-#    return HttpResponseRedirect(reverse('Booking:acceptproposal'))
+def accept_proposal(request,id):
+    guest = Guest.objects.get(id=id)
+    guest.status = 1
+    #counter=guest.booking.counter
+    #booking = guest.booking
+    #counter+=1
+    #booking.counter = counter
+    #booking.save()
+    guest.save()
+    return HttpResponseRedirect(reverse('Booking:confirm'))
+
+def decline_proposal(request,id):
+    guest =  Guest.objects.get(id=id)
+    guest.delete()
+    return HttpResponseRedirect(reverse('account:playerprofile'))
+
+
 
 #def decline_proposal(request,id):
     #booking_proposal = Booking_inprogress.objects.get(id=id)

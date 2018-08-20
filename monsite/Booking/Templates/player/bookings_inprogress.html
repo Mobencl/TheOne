@@ -65,8 +65,11 @@
   <div class="nav-scroller bg-white box-shadow">
       <nav class="nav nav-underline">
         <a class="nav-link active" href="#">Buddy</a>
-        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
-        <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
+        <a class="nav-link" href="/account/profile/player/">
+          Game proposals
+        </a>
+        <a class="nav-link" href="/Booking/create/">Booking in Progress</a>
+        <a class="nav-link" href="#"></a>
 
       </nav>
     </div>
@@ -99,8 +102,36 @@
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
 
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Continue booking</a>
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:deletebookinginprogress' Booking_inprogress.id %}" >Cancel booking</a>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+{% endfor %}
+
+{% for Guest in Guest %}
+                  <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                      {% if Guest.booking.terrain.photo %}
+                      <img class="card-img-top" src =  "{{ Booking_inprogress.terrain.photo.url }}" alt="Card image cap">
+                      {% endif %}
+                      <div class="card-body">
+
+                        <p class="card-text"> Sport center: {{ Guest.booking.terrain.sportcenterName }}</p>
+                        <p class="card-text">Type: {{ Guest.booking.terrain.TerrainType }}  </p>
+                        <p class="card-text">ID: {{ Guest.booking.booking_id }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+
                             <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Edit booking</a>
-                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:deleteconfirmedbooking' Booking_inprogress.id %}" >Delete booking</a>
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Delete booking</a>
 
                           </div>
 

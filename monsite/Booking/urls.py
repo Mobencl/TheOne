@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from Booking.views import show_terrains,show_availibility, confirm_booking,show_confirmedbookings,show_bookingsinprogress
 from Booking.views import delete_bookinginprogress,delete_confirmedbooking
-from Booking.views import show_guests,add_guests
+from Booking.views import show_guests,add_guests,accept_proposal, decline_proposal
 app_name = 'Booking'
 
 urlpatterns = [
@@ -20,5 +20,7 @@ urlpatterns = [
     url(r'^profile/bookings/inprogress/(?P<id>[0-9]+)/delete$', delete_bookinginprogress,  name='deletebookinginprogress'),
     url(r'^player/guests/$', show_guests,  name='showguests'),
     url(r'^player/guests/(?P<id>[0-9]+)/addguests/$', add_guests,  name='addguests'),
+    url(r'^player/(?P<id>[0-9]+)/accept/$', accept_proposal , name='acceptproposal'),
+    url(r'^player/(?P<id>[0-9]+)/decline/$', decline_proposal , name='declineproposal'),
 
 ]
