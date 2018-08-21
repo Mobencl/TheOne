@@ -6,7 +6,10 @@ from django.db.models.signals import post_save
 class ProfileUser(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     role = models.CharField(max_length=255,null=True)
-    #address = models.CharField(max_length=255,null=True)
+    address = models.CharField(max_length=255,null=True)
+    phone = models.CharField(max_length = 10,null=True)
+    postalcode = models.CharField(max_length=6,null=True)
+    sportcenterName = models.CharField(max_length=255,default='')
     #gender = models.CharField(max_length=255,null=True)
 @receiver(post_save, sender=User)
 def set_user(sender,instance,created,**kwargs):
@@ -17,7 +20,6 @@ def save_set(sender,instance,**kwargs):
     instance.profileuser.save()
 
 class Terrain (models.Model):
-    sportcenterName = models.CharField(max_length=255,default='')
     terrainAvailibility =  models.ForeignKey(User,on_delete=models.CASCADE)
     TerrainType = models.CharField(max_length  = 255)
     minimumCapacity = models.IntegerField(default = 0)
@@ -36,6 +38,17 @@ class Aivailibility(models.Model):
     notAvailableTill = models.DateTimeField(null=True)
     class Meta:
         verbose_name_plural = 'Aivailibility'
+
+
+class Membership (models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    partner=models.ForeignKey(ProfileUser, on_delete=models.CASCADE, null=True)
+    status= models.IntegerField(default=0)
+    membershipNumber=models.CharField(max_length=255,default='',null=True)
+    class Meta:
+        verbose_name_plural = 'Membership'
+
+
 
     #def From(self):
     #    return self.strftime("%Y-%m-%d %H:%M:%S",self.notAivalableFrom)

@@ -10,8 +10,8 @@ from accounts.models import Terrain
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from accounts.forms import AddTerrainView,AvailibilityForm
-from accounts.models import ProfileUser, Aivailibility
-from accounts.forms import UserRole
+from accounts.models import ProfileUser, Aivailibility, Membership
+from accounts.forms import UserRole, MembershipForm
 from Booking.models import Guest
 
 
@@ -52,13 +52,89 @@ def role_view(request):
     if form.is_valid:
         user=request.user
         role=request.POST.get('role')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
         user.profileuser.role=role
+        user.profileuser.address = address
+        user.profileuser.phone = phone
         user.save()
         if  user.profileuser.role == 'Partner':
             return redirect ('/account/profile/partner')
         elif user.profileuser.role =='Player':
             return redirect ('/account/profile/player')
     return render(request,'accounts/userrole.html',{'form': form})
+
+
+#For the player
+def show_sportcenters(request):
+    user=request.user
+    sportcenter_list = ProfileUser.objects.filter(role='Partner')
+    return render(request,'membership/show_sportcenters.html',{'ProfileUser': sportcenter_list})
+
+
+def membership_proposal(request,id):
+    user=request.user
+    partner=ProfileUser.objects.get(id=id)
+    membership= Membership()
+    form=MembershipForm(request.POST or None)
+    if form.is_valid():
+
+        membership.membershipNumber= form.cleaned_data.get('membership')
+        membership.user=user
+        membership.partner=partner
+        membership.save()
+        return HttpResponseRedirect(reverse('accounts:confirmedmembership'))
+    return render(request,'membership/add_membership.html',{'form': form})
+
+
+
+
+def confirmed_memberships(request):
+    user = request.user
+    membership_list=Membership.objects.filter(user=user).filter(status=1)
+    inprogressmember_list=Membership.objects.filter(user=user).filter(status=0)
+    return render(request,'membership/confirmed_membership.html',{'Membership': membership_list, 'Inprogress': inprogressmember_list})
+
+
+#For the partner
+def show_membershipproposals(request):
+    membershipProposal= Membership.objects.filter(status=0)
+    return render(request,'membership/show_membershipproposals.html',{'Membership': membershipProposal})
+
+def accept_membershipproposal(request,id):
+    membershipProposal=Membership.objects.get(id=id)
+    membershipProposal.status=1
+    membershipProposal.save()
+    return HttpResponseRedirect(reverse('accounts:showmembershipproposals'))
+
+def deny_membership(request,id):
+    membershipProposal=Membership.objects.get(id=id)
+    membership.status=0
+    membershipProposal.save()
+    return HttpResponseRedirect(reverse('accounts:showmembershipproposals'))
+
+def partnerconfirmed_membership(request):
+    user=request.user
+    membership_list=Membership.objects.filter(user=user).filter(status=1)
+    return render(request,'membership/show_partnermembership.html',{'Membership': membership_list})
+
+
+def delete_membership(request,id):
+    user=request.user
+    memebership=Membership.obejcts.get(id=id)
+    membership.delete()
+    return HttpResponseRedirect(reverse('accounts:confirmedmembership'))
+
+
+
+
+
+
+
+
+
+
+
 
 
 def partnerprofile_view(request):
@@ -69,7 +145,8 @@ def partnerprofile_view(request):
 
 def playerprofile_view(request):
     user=request.user
-    guest_list =Guest.objects.filter(user=user)
+    guest_list =Guest.objects.filter(user=user).filter(status=0)
+
     return render(request,'accounts/playerprofile.html',{'user': user,'Guest': guest_list})
 
 

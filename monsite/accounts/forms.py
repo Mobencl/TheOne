@@ -6,7 +6,7 @@ from django.contrib.auth import (authenticate,
 from django.contrib.auth.models import User
 from accounts.models import Terrain, Aivailibility,ProfileUser
 from django.contrib.admin.widgets import AdminSplitDateTime
-
+from accounts.models import Membership
 
 
 
@@ -80,6 +80,17 @@ class AddTerrainView(forms.ModelForm):
 class UserRole(forms.ModelForm):
     role = forms.CharField(
     label ='Role',
+    max_length = 100,
+    min_length = 5,
+    widget = forms.TextInput(attrs = {'class':'form-control'}))
+    addess = forms.CharField(
+    label ='Address',
+    max_length = 100,
+    min_length = 5,
+    widget = forms.TextInput(attrs = {'class':'form-control'}))
+
+    phone = forms.CharField(
+    label ='Phone number',
     max_length = 100,
     min_length = 5,
     widget = forms.TextInput(attrs = {'class':'form-control'}))
@@ -178,4 +189,13 @@ widget=AdminSplitDateTime()
             'closing',
             'notAvailableFrom',
             'notAvailableTill',
+        )
+
+class MembershipForm(forms.ModelForm):
+    membership =  forms.CharField(label ='Membership number',
+    widget = forms.TextInput(attrs = {'class':'form-control'}))
+    class Meta:
+        model = Membership
+        fields=(
+        'membership',
         )

@@ -116,8 +116,8 @@ def decline_proposal(request,id):
 
 
 #def decline_proposal(request,id):
-    #booking_proposal = Booking_inprogress.objects.get(id=id)
-    #
+#    booking_proposal = Booking_inprogress.objects.get(id=id)
+
 
 #def acceptGame
 #booking_inprogress.guest.status

@@ -75,6 +75,7 @@
         </a>
         <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
         <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
+        <a class="nav-link" href="/account/profile/player/sportcenters/">Memberships</a>
 
 
       </nav>
@@ -88,12 +89,12 @@
           <small></small>
         </div>
       </div>
-{% for Guest in Guest %}
+                          {% for Guest in Guest %}
 
                         <div class="col-md-4">
                           <div class="card mb-4 box-shadow">
                             {% if Guest.booking.terrain.photo %}
-                            <img class="card-img-top" src =  "{{ Booking_inprogress.terrain.photo.url }}" alt="Card image cap">
+                            <img class="card-img-top" src =  "{{ Guest.booking.terrain.photo.url }}" alt="Card image cap">
                             {% endif %}
                             <div class="card-body">
 
@@ -103,8 +104,8 @@
                               <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
 
-                                  <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Edit booking</a>
-                                  <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Delete booking</a>
+                                  <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:acceptproposal' Guest.id %}" >Accept proposal</a>
+                                  <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:declineproposal' Guest.id %}">Decline proposal</a>
 
                                 </div>
 

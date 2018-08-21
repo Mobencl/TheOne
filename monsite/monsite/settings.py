@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_q'
+    'django_q',
+    'paypal.standard.ipn',
 
 
 ]
@@ -148,3 +149,8 @@ r'^Booking/player/confirm/(?P<id>[0-9]+)/confirm/$'
 }
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+#paypal settings
+PAYPAL_RECEIVER_EMAIL ='sonalis.packtpub-test1@gmail.com'
+PAYPAL_TEST = True
