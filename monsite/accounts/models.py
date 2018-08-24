@@ -10,6 +10,9 @@ class ProfileUser(models.Model):
     phone = models.CharField(max_length = 10,null=True)
     postalcode = models.CharField(max_length=6,null=True)
     sportcenterName = models.CharField(max_length=255,default='')
+    photo = models.ImageField(upload_to='user_directory_path',default='',blank=True)
+    path= models.CharField(max_length=255,default='user_directory_path')
+
     #gender = models.CharField(max_length=255,null=True)
 @receiver(post_save, sender=User)
 def set_user(sender,instance,created,**kwargs):

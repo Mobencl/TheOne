@@ -18,7 +18,7 @@
      <link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet">
   </head>
 
-  <body class="bg-light" background="http://www.insightbmx.com/wp-content/uploads/2013/04/black-gradient-background.png">
+  <body class="bg-light" background="https://images2.alphacoders.com/774/thumb-1920-774372.jpg">
     <div class="container">
           <div class="py-5 text-center">
 
@@ -27,7 +27,7 @@
           </div>
           <header>
           <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="#">AppName</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,18 +37,10 @@
                   <a class="nav-link">Hey {{ user }} <span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" href="edit/">Edit profile</a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Settings</a>
-                </li>
 
 
-                <li class="nav-item">
-                  <a class="nav-link" href="/account/logout/">Log out</a>
-                </li>
+
+
               </ul> </nav>
             </header>
 
@@ -62,19 +54,20 @@
 
 
 
-  <div class="nav-scroller bg-white box-shadow">
-      <nav class="nav nav-underline">
-        <a class="nav-link active" href="/account/profile/player/">Buddy</a>
-        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
-        <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
+            <div class="nav-scroller bg-white box-shadow">
+                <nav class="nav nav-underline">
+                  <a class="nav-link active" href="/account/profile/player/">Home</a>
+                  <a class="nav-link" href="/Booking/player/bookings/confirmed/">Confirmed bookings</a>
+                  <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
+                  <a class="nav-link" href="/account/profile/player/confirmed_memberships/">Memberships</a>
+                  <a class="nav-link" href="/account/logout/">Log out</a>
 
-
-      </nav>
-    </div>
+                </nav>
+              </div>
 
     <main role="main" class="container">
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
-        <img class="mr-3" src="../../assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
+
         <div class="lh-100">
           <h6 class="mb-0 text-white lh-100">Step 1 : Choose a terrain and check its availibility</h6>
           <small></small>
@@ -93,10 +86,12 @@
                       <img class="card-img-top" src =  "{{ Terrain.photo.url }}" alt="Card image cap">
                       {% endif %}
                       <div class="card-body">
-
-                        <p class="card-text"> Terrain Type: {{ Terrain.TerrainType }}</p>
-                        <p class="card-text">Maximum capacity: {{ Terrain.maximumCapacity }}</p>
-                        <p class="card-text">Minimum Capacity: {{ Terrain.minimumCapacity }}</p>
+                        <h6 class="card-text"> Sport center: {{ Terrain.terrainAvailibility.profileuser.sportcenterName }}</h6>
+                        <h6 class="card-text"> Address: {{ Terrain.terrainAvailibility.profileuser.address }}</h6>
+                        <h6 class="card-text"> Phone number: {{ Terrain.terrainAvailibility.profileuser.phone }}</h6>
+                        <h6 class="card-text"> Terrain Type: {{ Terrain.TerrainType }}</h6>
+                        <h6 class="card-text">Maximum capacity: {{ Terrain.maximumCapacity }}</h6>
+                        <h6 class="card-text">Minimum Capacity: {{ Terrain.minimumCapacity }}</h6>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
 

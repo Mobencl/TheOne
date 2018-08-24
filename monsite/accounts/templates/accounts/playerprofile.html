@@ -36,30 +36,24 @@
                 <li class="nav-item active">
                   <a class="nav-link">Hey {{ user }} <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Games</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Settings</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="edit/">Edit profile</a>
-                </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" href="/account/logout/">Log out</a>
-                </li>
+
+
+
               </ul> </nav>
             </header>
 
-  <body class="bg-light" background="http://www.insightbmx.com/wp-content/uploads/2013/04/black-gradient-background.png">
-    <div class="container">
+  <body class="bg-light" background="https://images2.alphacoders.com/774/thumb-1920-774372.jpg">
+
 
 
 
             <center class="row">
+
             <div class="col-lg-12">
-              <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+              {% if profileuser.photo  %}
+              <img class="rounded-circle" src="{{ profileuser.photo.url }}" alt="Generic placeholder image" width="160" height="160">
+              {% endif %}
               <h2>{{ user }}</h2>
               <p></p>
               <p><a class="btn btn-secondary" href="#" role="button">Edit Profile</a></p>
@@ -69,19 +63,35 @@
 
   <div class="nav-scroller bg-white box-shadow">
       <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Buddy</a>
-        <a class="nav-link" href="/Booking/player/create/">
-          Create a game
-        </a>
-        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
+        <a class="nav-link active" href="/account/profile/player/">Home</a>
+          {% if Booking %}
+        <a class="nav-link" href=""> Create a game </a>
+            {% else %}
+          <a class="nav-link" href="/Booking/player/create/"> Create a game </a>
+          {% endif %}
+        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Confirmed bookings</a>
         <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
-        <a class="nav-link" href="/account/profile/player/sportcenters/">Memberships</a>
+        <a class="nav-link" href="/account/profile/player/confirmed_memberships/">Memberships</a>
+        <a class="nav-link" href="/account/logout/">Log out</a>
 
 
       </nav>
     </div>
 
     <main role="main" class="container">
+
+      {% if  Booking %}
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+
+        <div class="lh-100">
+          <h6 class="mb-0 text-white lh-100">You have one booking in progress, you can't create a game</h6>
+          <small></small>
+        </div>
+      </div>
+       {% endif %}
+
+
+       {% if Guest %}
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
 
         <div class="lh-100">
@@ -119,10 +129,21 @@
 
 {% endfor %}
 
+ {% else %}
+ <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
 
-    </main>
+   <div class="lh-100">
+     <h6 class="mb-0 text-white lh-100">You have no game invitation</h6>
+     <small></small>
+   </div>
+ </div>
+
+ {% endif %}
 
 
+
+
+  </main>
 
 
 

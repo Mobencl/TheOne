@@ -151,6 +151,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-#paypal settings
-PAYPAL_RECEIVER_EMAIL ='sonalis.packtpub-test1@gmail.com'
+#paypal settings ! trying to unserstand how to integrate paypal/
+#PAYPAL_RECEIVER_EMAIL =
 PAYPAL_TEST = True

@@ -83,7 +83,7 @@ class UserRole(forms.ModelForm):
     max_length = 100,
     min_length = 5,
     widget = forms.TextInput(attrs = {'class':'form-control'}))
-    addess = forms.CharField(
+    address = forms.CharField(
     label ='Address',
     max_length = 100,
     min_length = 5,
@@ -96,7 +96,12 @@ class UserRole(forms.ModelForm):
     widget = forms.TextInput(attrs = {'class':'form-control'}))
     class Meta:
         model = ProfileUser
-        fields = ('role',)
+        fields = ('role',
+
+                'phone',
+                'address',
+               'photo'
+               )
 class UserRegisterForm(forms.ModelForm):
     username = forms.CharField(
     label ='Username',

@@ -81,18 +81,21 @@ def delete_bookinginprogress(request,id):
 def show_guests(request):
     user=request.user
     role=user.profileuser.role
-    guest_list = ProfileUser.objects.exclude(id=user.id).filter(role='Player')
+    guest_list = ProfileUser.objects.exclude(user=user).filter(role='Player')
+
     return render(request,'player/show_guests.html',{'ProfileUser': guest_list})
 
 def add_guests(request,id):
     user=request.user
     booking_inprogress = Booking_inprogress.objects.get(user=user)#there is only one booking in progress
     profileUser = ProfileUser.objects.get(id=id)
+
     newGuest = Guest()
     newGuest.booking=booking_inprogress
     newGuest.user=profileUser.user
     newGuest.save()
-    return HttpResponseRedirect(reverse('Booking:showguests'))
+    guest_list=ProfileUser.objects.exclude(user=user).filter(role='Player').exclude(user=newGuest.user)
+    return render(request,'player/show_guests.html',{'ProfileUser': guest_list})
 
 
 
@@ -111,7 +114,7 @@ def accept_proposal(request,id):
 def decline_proposal(request,id):
     guest =  Guest.objects.get(id=id)
     guest.delete()
-    return HttpResponseRedirect(reverse('account:playerprofile'))
+    return HttpResponseRedirect(reverse('accounts:playerprofile'))
 
 
 

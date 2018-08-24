@@ -18,7 +18,7 @@
      <link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet">
   </head>
 
-  <body class="bg-light">
+    <body class="bg-light" background="https://images2.alphacoders.com/774/thumb-1920-774372.jpg">
     <div class="container">
           <div class="py-5 text-center">
 
@@ -36,19 +36,7 @@
                 <li class="nav-item active">
                   <a class="nav-link">Hey {{ user }} <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Games</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Settings</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="edit/">Edit profile</a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="/account/logout/">Log out</a>
-                </li>
+              
               </ul> </nav>
             </header>
 
@@ -69,13 +57,11 @@
 
   <div class="nav-scroller bg-white box-shadow">
       <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Buddy</a>
-        <a class="nav-link" href="/Booking/player/create/">
-          Create a game
-        </a>
-        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
+        <a class="nav-link active" href="/account/profile/player/">Home</a>
+        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Confirmed bookings</a>
         <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
-
+        <a class="nav-link" href="/account/profile/player/confirmed_memberships/">Memberships</a>
+        <a class="nav-link" href="/account/logout/">Log out</a>
 
 
       </nav>

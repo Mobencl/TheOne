@@ -36,23 +36,11 @@
                 <li class="nav-item active">
                   <a class="nav-link">Hey {{ user }} <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Games</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Settings</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="edit/">Edit profile</a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="/account/logout/">Log out</a>
-                </li>
+              
               </ul> </nav>
             </header>
 
-  <body class="bg-light" background="http://www.insightbmx.com/wp-content/uploads/2013/04/black-gradient-background.png">
+    <body class="bg-light" background="https://images2.alphacoders.com/774/thumb-1920-774372.jpg">
     <div class="container">
 
 
@@ -69,30 +57,29 @@
 
   <div class="nav-scroller bg-white box-shadow">
       <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Buddy</a>
-        <a class="nav-link" href="/Booking/player/create/">
-          Create a game
-        </a>
-        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Bookings</a>
+        <a class="nav-link active" href="/account/profile/player/">Home</a>
+        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Confirmed bookings</a>
         <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
-
-
+        <a class="nav-link" href="/account/profile/player/confirmed_memberships/">Memberships</a>
+        <a class="nav-link" href="/account/logout/">Log out</a>
 
       </nav>
     </div>
 
     <main role="main" class="container">
+    {% if Membership or Inprogress  %}
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
 
         <div class="lh-100">
-          <h6 class="mb-0 text-white lh-100">Manage memberships</h6>
+
+          <h6 class="mb-0 text-white lh-100">Memberships</h6>
           <small></small>
         </div>
       </div>
 
       <div class="album py-5 bg-light">
-              <div class="container">
 
+<div class="container">
                 <div class="row">
 {% for Inprogress in Inprogress %}
 
@@ -103,12 +90,12 @@
 
     <div class="card-body">
 
-      <p class="card-text"> Name: {{ Inprogress.user.first_name }}</p>
-      <p class="card-text"> Last name: {{ Inprogress.user.last_name }}</p>
-      <p class="card-text"> Address: {{ Inprogress.user.profileuser.address }}</p>
-      <p class="card-text"> Phone number: {{ Inprogress.user.profileuser.phone }}</p>
-            <p class="card-text"> Membership number: {{ Inprogress.membershipNumber }}</p>
-      <p class="card-text">In progress</p>
+      <h6 class="card-text"> Name: {{ Inprogress.user.first_name }}</h6>
+      <h6 class="card-text"> Last name: {{ Inprogress.user.last_name }}</h6>
+      <h6 class="card-text"> Address: {{ Inprogress.user.profileuser.address }}</h6>
+      <h6 class="card-text"> Phone number: {{ Inprogress.user.profileuser.phone }}</h6>
+            <h6 class="card-text"> Membership number: {{ Inprogress.membershipNumber }}</h6>
+      <h6 class="card-text">In progress</h6>
 
 
       <div class="d-flex justify-content-between align-items-center">
@@ -140,36 +127,46 @@
 
     <div class="card-body">
 
-      <p class="card-text"> Sport center: {{ Membership.user.first_name }}</p>
-      <p class="card-text"> Sport center: {{ Membership.user.last_name }}</p>
+      <p class="card-text"> First name: {{ Membership.user.first_name }}</p>
+      <p class="card-text"> Lat name: {{ Membership.user.last_name }}</p>
       <p class="card-text"> Sport center: {{ Membership.partner.sportcenterName }}</p>
-      <p class="card-text"> Sport center: {{ Membership.partner.membershipNumber }}</p>
+      <p class="card-text"> Membership Number: {{ Membership.membershipNumber }}</p>
       <p class="card-text">Member</p>
 
 
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="btn-group">
-
-          <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'accounts:addmembership' ProfileUser.id %}" >Add membership</a>
-
-
-        </div>
-
-      </div>
     </div>
   </div>
+
+
+</div>
+</div>
 
 
 </div>
 
 
 {% endfor %}
+{% else %}
+
+<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+
+  <div class="lh-100">
+
+    <h6 class="mb-0 text-white lh-100">You don't have any memebrship</h6>
+    <small></small>
+  </div>
+</div>
+
+{% endif %}
+
+
+<a role = "button" class="btn btn-lg btn-primary btn-block"  href="/account/profile/player/sportcenters">Add Membership</a>
+
+
 
 
 
     </main>
-
-
 
 
 

@@ -19,7 +19,7 @@
      <link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet">
   </head>
 
-  <body class="bg-light" background="">
+  <body class="bg-light" background="https://images2.alphacoders.com/774/thumb-1920-774372.jpg">
     <div class="container">
           <div class="py-5 text-center">
 
@@ -37,18 +37,10 @@
                   <a class="nav-link">Hey {{ user }} <span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" href="edit/">Edit profile</a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Settings</a>
-                </li>
 
 
-                <li class="nav-item">
-                  <a class="nav-link" href="/account/logout/">Log out</a>
-                </li>
+
+
               </ul> </nav>
             </header>
 
@@ -64,12 +56,11 @@
 
   <div class="nav-scroller bg-white box-shadow">
       <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Buddy</a>
-        <a class="nav-link" href="/account/profile/player/">
-          Game proposals
-        </a>
-        <a class="nav-link" href="/Booking/create/">Booking in Progress</a>
-        <a class="nav-link" href="#"></a>
+        <a class="nav-link active" href="/account/profile/player/">Home</a>
+        <a class="nav-link" href="/Booking/player/bookings/confirmed/">Confirmed bookings</a>
+        <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
+        <a class="nav-link" href="/account/profile/player/confirmed_memberships/">Memberships</a>
+        <a class="nav-link" href="/account/logout/">Log out</a>
 
       </nav>
     </div>
@@ -78,7 +69,7 @@
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
 
         <div class="lh-100">
-          <h6 class="mb-0 text-white lh-100">Step 3 : Confirm your reservation and make a payment</h6>
+          <h6 class="mb-0 text-white lh-100">Step 3 : Confirm your reservation or add friends to your reservation</h6>
           <small></small>
         </div>
       </div>
@@ -109,6 +100,7 @@
                          <th>Capacity</th>
                          <th>From</th>
                          <th>Till</th>
+                         <th>Booking Id</th>
                        </tr>
 
                      </thead>
@@ -122,6 +114,7 @@
                          <td>{{Terrain.maximumCapacity}}</td>
                          <td>{{ Booking_inprogress.bookingFrom}}</td>
                          <td>{{ Booking_inprogress.bookingUntil}}</td>
+                          <td>{{ Booking_inprogress.booking_id}}</td>
                          <td></td>
 
                        </tr>
@@ -135,7 +128,7 @@
                    <div class="btn-group">
 
                      <a role="button" class=" btn btn-sm btn-outline-secondary" href="{% url 'Booking:showguests' %}" >Add players</a>
-
+                    <a role="button" class=" btn btn-sm btn-outline-secondary" href="" >Confirm booking</a>
 
                    </div>
 

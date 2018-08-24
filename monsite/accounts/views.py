@@ -12,7 +12,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from accounts.forms import AddTerrainView,AvailibilityForm
 from accounts.models import ProfileUser, Aivailibility, Membership
 from accounts.forms import UserRole, MembershipForm
-from Booking.models import Guest
+from Booking.models import Guest,Booking_inprogress
 
 
 def home (request):
@@ -48,21 +48,20 @@ def register_view(request):
 
 
 def role_view(request):
-    form=UserRole(request.POST or None)
-    if form.is_valid:
-        user=request.user
-        role=request.POST.get('role')
-        address = request.POST.get('address')
-        phone = request.POST.get('phone')
-        user.profileuser.role=role
-        user.profileuser.address = address
-        user.profileuser.phone = phone
-        user.save()
-        if  user.profileuser.role == 'Partner':
-            return redirect ('/account/profile/partner')
-        elif user.profileuser.role =='Player':
-            return redirect ('/account/profile/player')
+    user=request.user
+    form=UserRole(request.POST,request.FILES)
+    user.profileuser.address=request.POST.get('address')
+    user.profileuser.phone=request.POST.get('phone')
+    user.profileuser.role=request.POST.get('role')
+    user.profileuser.photo=request.POST.get('photo')
+    user.save()
+
+    if  user.profileuser.role == 'Partner':
+        return redirect ('/account/profile/partner')
+    elif user.profileuser.role =='Player':
+        return redirect ('/account/profile/player')
     return render(request,'accounts/userrole.html',{'form': form})
+
 
 
 #For the player
@@ -78,15 +77,12 @@ def membership_proposal(request,id):
     membership= Membership()
     form=MembershipForm(request.POST or None)
     if form.is_valid():
-
         membership.membershipNumber= form.cleaned_data.get('membership')
         membership.user=user
         membership.partner=partner
         membership.save()
-        return HttpResponseRedirect(reverse('accounts:confirmedmembership'))
+        return HttpResponseRedirect(reverse('accounts:confirmedmemberships'))
     return render(request,'membership/add_membership.html',{'form': form})
-
-
 
 
 def confirmed_memberships(request):
@@ -145,9 +141,10 @@ def partnerprofile_view(request):
 
 def playerprofile_view(request):
     user=request.user
-    guest_list =Guest.objects.filter(user=user).filter(status=0)
-
-    return render(request,'accounts/playerprofile.html',{'user': user,'Guest': guest_list})
+    profileuser=ProfileUser.objects.get(user=user)
+    guest_list =Guest.objects.filter(user=user).filter(status=3)
+    booking_inprogress=Booking_inprogress.objects.filter(user=user).filter(status=0)
+    return render(request,'accounts/playerprofile.html',{'profileuser': profileuser,'Guest': guest_list, 'Booking':booking_inprogress})
 
 
 def terrains_view(request):
@@ -175,9 +172,6 @@ def addTerrain(request):
         return redirect('/account/profile/partner/terrains')
     return render(request,'terrains/addTerrain_form.html',{'form': form})
 
-def user_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 
 def logout_view(request):
