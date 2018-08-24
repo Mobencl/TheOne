@@ -17,12 +17,12 @@ to some pages for each user  --It should be done the last two weeks before the p
 * Show availibilities to the partner /done
 
 
-# For the user:(Functions)
+# For the user:(Functions)/All done
 
 --this should be done this week 4 august--
 * Start Booking/ done
 * Show Sportcenters with details/done
-* Show Terrains of each sportcenter with availibilities/done but I st/ill can't display the date and the time from the datetimefield/done
+* Show Terrains of each sportcenter with availibilities/done but I still can't display the date and the time from the datetimefield/done
 * make a booking(conditions for Booking in progress):there is only one booking in progress/a player cannot have two bookings in progress 
 Two models : /Booking/(deleted) and Booking_inprogress   - Only one model-Booking_inprogress /DONE
 
@@ -49,10 +49,10 @@ Add a condition so a user can't have the same availibility time for the terrains
 
 
 # TheOne-New feature: 
-Invite friends to the booking_inprogress
-Membership/memebership proposal/If the user has already a membership with the sport center, he can add it to his account.
-A partner checks the memebership proposal information of the player/ He can accept it or decline it.
+*Invite friends to the booking_inprogress
+*Membership/memebership proposal/If the user has already a membership with the sport center, he can add it to his account.
+*A partner checks the membership proposal information of the player/ He can accept it or decline it.
 The booking price changes in fucntion of the memebership type, the number of players who booked the terrain and the terrainType
 
-
+# In the code I created a class called AIvailibility(it is supposed to be Availibility) ==didn't change it cause it was everywhere in the code, I didn't want to take the risk and change the class name.
 
