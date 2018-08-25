@@ -132,7 +132,6 @@ def delete_membership(request,id):
 
 
 
-
 def partnerprofile_view(request):
     user = request.user
     args = {'user': user}
@@ -140,11 +139,13 @@ def partnerprofile_view(request):
 
 
 def playerprofile_view(request):
+
     user=request.user
     profileuser=ProfileUser.objects.get(user=user)
     guest_list =Guest.objects.filter(user=user).filter(status=3)
     booking_inprogress=Booking_inprogress.objects.filter(user=user).filter(status=0)
-    return render(request,'accounts/playerprofile.html',{'profileuser': profileuser,'Guest': guest_list, 'Booking':booking_inprogress})
+    booking=Booking_inprogress.objects.filter(user=user).filter(status=1)
+    return render(request,'accounts/playerprofile.html',{'profileuser': profileuser,'Guest': guest_list, 'Booking_inprogress':booking_inprogress,'Booking':booking})
 
 
 def terrains_view(request):
@@ -158,6 +159,7 @@ def deleteTerrain(request,id):
     #terrains_list=Terrain.objects.filter(terrainAvailibility=user)
     #return render(request,'terrains/terrains.html',{'Terrain': terrains_list})
     return HttpResponseRedirect(reverse('accounts:terrains'))
+
 
 
 
@@ -193,6 +195,8 @@ def showAvailibilities(request,id):
     #user=request.user
     terrain = Terrain.objects.get(id=id)
     availibility_list = Aivailibility.objects.filter(availibility=terrain)
+
+
     return render(request,'terrains/availibility.html',{'Availibility': availibility_list})
 
 def addAvailibility(request,id):

@@ -40,7 +40,7 @@
 
 
 
-              
+
               </ul> </nav>
             </header>
 
@@ -82,22 +82,72 @@
               <div class="container">
 
                 <div class="row">
-{% for Booking_inprogress in Booking_inprogress %}
+
                   <div class="col-md-4">
+                    {% for Booking_inprogress in Booking_inprogress %}
                     <div class="card mb-4 box-shadow">
                       {% if Booking_inprogress.terrain.photo %}
                       <img class="card-img-top" src =  "{{ Booking_inprogress.terrain.photo.url }}" alt="Card image cap">
                       {% endif %}
                       <div class="card-body">
 
-                        <p class="card-text"> Sport center: {{ Booking_inprogress.terrain.sportcenterName }}</p>
-                        <p class="card-text">Type: {{ Booking_inprogress.terrain.TerrainType }}  </p>
-                        <p class="card-text">ID: {{ Booking_inprogress.booking_id }}</p>
+                        <div class="card-body">
+                            <h6 class="card-text"> Organizer: {{ Booking_inprogress.user.username }}</h6>
+                          <h6 class="card-text"> Sport center: {{ Booking_inprogress.terrain.terrainAvailibility.profileuser.sportcenterName }}</h6>
+                          <h6 class="card-text"> Address: {{ Booking_inprogress.terrain.terrainAvailibility.profileuser.address }}</h6>
+                          <h6 class="card-text"> Phone number: {{ Booking_inprogress.terrain.terrainAvailibility.profileuser.phone }}</h6>
+                          <h6 class="card-text"> Terrain type: {{ Booking_inprogress.terrain.TerrainType }}</h6>
+                          <h6 class="card-text"> Maximum capacity: {{ Booking_inprogress.terrain.maximumCapacity }}</h6>
+                          <h6 class="card-text"> From: {{ Booking_inprogress.bookingFrom }}</h6>
+                          <h6 class="card-text">Till: {{ Booking_inprogress.bookingUntil }}</h6>
+                            <h6 class="card-text">Price: {{ Booking_inprogress.price }}</h6>
+                          <h6 class="card-text">Booking id: {{ Booking_inprogress.booking_id }}</h6>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
 
-                            <a role="button" class="btn btn-sm btn-outline-secondary" href="" >Edit booking</a>
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:showconfirmedguest' Booking_inprogress.id %}" >Show guests</a>
                             <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:deleteconfirmedbooking' Booking_inprogress.id %}" >Delete booking</a>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+  {% endfor %}
+
+</div>
+</div>
+</div>
+
+
+                  <div class="col-md-4">
+                    {% for Guest in Guest %}
+                    <div class="card mb-4 box-shadow">
+                      {% if Guest.booking.user.profileuser.photo.url %}
+                      <img class="card-img-top" src =  "{{ Guest.booking.user.profileuser.photo.url }}" alt="Card image cap">
+                      {% endif %}
+                      <div class="card-body">
+
+                        <div class="card-body">
+                          <h6 class="card-text"> Organizer: {{ Guest.booking.user.username }}</h6>
+                          <h6 class="card-text"> Sport center: {{ Guest.booking.terrain.terrainAvailibility.profileuser.sportcenterName }}</h6>
+                          <h6 class="card-text"> Address: {{ Guest.booking.terrain.terrainAvailibility.profileuser.address }}</h6>
+                          <h6 class="card-text"> Phone number: {{ Guest.booking.terrain.terrainAvailibility.profileuser.profileuser.phone }}</h6>
+                          <h6 class="card-text"> Terrain type: {{ Guest.booking.terrain.TerrainType }}</h6>
+                          <h6 class="card-text"> Maximum capacity: {{ Guest.booking.terrain.maximumCapacity }}</h6>
+                          <h6 class="card-text"> From: {{ Guest.booking.bookingFrom }}</h6>
+                          <h6 class="card-text">Till: {{ Guest.booking.bookingUntil }}</h6>
+                          <h6 class="card-text">Price: {{ Guest.price }}</h6>
+                          <h6 class="card-text">Booking id: {{ Guest.booking.booking_id }}</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+
+                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:showconfirmedguest' Guest.booking.id %}" >Show guests</a>
+
 
                           </div>
 
@@ -109,6 +159,7 @@
                   </div>
 
 {% endfor %}
+  </div>
 
 
 

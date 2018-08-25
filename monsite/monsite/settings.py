@@ -139,7 +139,6 @@ r'^account/logout/$',
 r'^account/register/$',
 r'^account/$',
 r'^admin/'
-
 }
 HOME_EXEMPT_URLS = {
 r'^account/logout/$',

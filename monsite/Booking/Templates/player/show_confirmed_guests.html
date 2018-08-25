@@ -76,7 +76,7 @@
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
         <img class="mr-3" src="../../assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
         <div class="lh-100">
-          <h6 class="mb-0 text-white lh-100">Step 4 : Add friends to your game !</h6>
+          <h6 class="mb-0 text-white lh-100">Players</h6>
           <small></small>
         </div>
       </div>
@@ -86,24 +86,25 @@
               <div class="container">
 
                 <div class="row">
-{% for ProfileUser in ProfileUser %}
+{% for Guest in Guest %}
 
                   <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
 
-                      <img class="card-img-top" src =  "{{ ProfileUser.photo }}" alt="Card image cap">
+                      <img class="card-img-top" src =  "{{ Guest.user.profileuser.photo.url }}" alt="Card image cap">
 
                       <div class="card-body">
 
-                        <h6 class="card-text"> Username: {{ ProfileUser.user.username }}</h6>
-                        <h6 class="card-text"> First name: {{ ProfileUser.user.first_name }}</h6>
+                        <h6 class="card-text"> Username: {{ Guest.user.username }}</h6>
+                        <h6 class="card-text"> First name: {{ Guest.user.first_name }}</h6>
+                        <h6 class="card-text"> First name: {{ Guest.user.last_name }}</h6>
 
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
 
 
 
-                            <a role="button" class="btn btn-sm btn-outline-secondary" href="{% url 'Booking:addguests' ProfileUser.id %}" >Invite</a>
+
 
 
                           </div>
@@ -119,17 +120,7 @@
   </div>
 
 
-<div class="d-flex justify-content-between align-items-center">
 
-
-
-<a role = "button" class="btn btn-lg btn-primary btn-block"   href="{% url 'Booking:confirmbooking' %}" >Confirm booking</a>
-
-
-<a role = "button" class="btn btn-lg btn-primary btn-block"   href="" >Cancel booking</a>
-
-
-  </div>
 
 
 

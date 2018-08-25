@@ -101,6 +101,7 @@
                          <th>From</th>
                          <th>Till</th>
                          <th>Booking Id</th>
+                         <th>Price</th>
                        </tr>
 
                      </thead>
@@ -115,6 +116,7 @@
                          <td>{{ Booking_inprogress.bookingFrom}}</td>
                          <td>{{ Booking_inprogress.bookingUntil}}</td>
                           <td>{{ Booking_inprogress.booking_id}}</td>
+                          <td>{{ Booking_inprogress.terrain.Price}}</td>
                          <td></td>
 
                        </tr>
@@ -128,7 +130,8 @@
                    <div class="btn-group">
 
                      <a role="button" class=" btn btn-sm btn-outline-secondary" href="{% url 'Booking:showguests' %}" >Add players</a>
-                    <a role="button" class=" btn btn-sm btn-outline-secondary" href="" >Confirm booking</a>
+                    <a role="button" class=" btn btn-sm btn-outline-secondary" href="{% url 'Booking:confirmbooking' %}" >Confirm booking</a>
+                    <a role="button" class=" btn btn-sm btn-outline-secondary" href="" >Cancel booking</a>
 
                    </div>
 
