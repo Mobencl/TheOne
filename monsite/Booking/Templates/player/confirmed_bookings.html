@@ -82,9 +82,9 @@
               <div class="container">
 
                 <div class="row">
-
+  {% for Booking_inprogress in Booking_inprogress %}
                   <div class="col-md-4">
-                    {% for Booking_inprogress in Booking_inprogress %}
+
                     <div class="card mb-4 box-shadow">
                       {% if Booking_inprogress.terrain.photo %}
                       <img class="card-img-top" src =  "{{ Booking_inprogress.terrain.photo.url }}" alt="Card image cap">
@@ -111,12 +111,16 @@
                           </div>
 
                         </div>
+                        </div>
+                        </div>
+                      </div>
                       </div>
 
-                    </div>
 
 
-                  </div>
+
+
+
   {% endfor %}
 
 </div>
@@ -124,7 +128,11 @@
 </div>
 
 
-                  <div class="col-md-4">
+
+<div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
                     {% for Guest in Guest %}
                     <div class="card mb-4 box-shadow">
                       {% if Guest.booking.user.profileuser.photo.url %}
@@ -152,16 +160,16 @@
                           </div>
 
                         </div>
+                        </div>
+                        </div>
                       </div>
-                    </div>
+                      </div>
 
-
-                  </div>
 
 {% endfor %}
-  </div>
-
-
+</div>
+</div>
+</div>
 
 
 

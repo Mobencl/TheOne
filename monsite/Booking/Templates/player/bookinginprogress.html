@@ -57,6 +57,11 @@
   <div class="nav-scroller bg-white box-shadow">
       <nav class="nav nav-underline">
         <a class="nav-link active" href="/account/profile/player/">Home</a>
+        {% if Booking_inprogress %}
+      <a class="nav-link" href=""> Create a game </a>
+          {% else %}
+        <a class="nav-link" href="/Booking/player/create/"> Create a game </a>
+        {% endif %}
         <a class="nav-link" href="/Booking/player/bookings/confirmed/">Confirmed bookings</a>
         <a class="nav-link" href="/Booking/player/bookings/inprogress/">Bookings in progress</a>
         <a class="nav-link" href="/account/profile/player/confirmed_memberships/">Memberships</a>
